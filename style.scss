@@ -1,0 +1,96 @@
+html {font-size: 62.5%;}
+*, ::before , ::after {box-sizing: border-box; font-family: 'gg sans', sans-serif; font-size: 1.8rem; line-height: normal;}
+
+$oneline: 95px;
+
+body {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; background: #2e2727; color: #fff; 
+}
+
+.title {
+    font-size: 7rem; display: flex; align-items: stretch; gap: 12px;
+    flex-wrap: wrap;
+    @media (max-width: 767px) {justify-content: center;}
+
+    * {font-size: 7rem;}
+}
+
+.list {
+    position: relative;
+    overflow: hidden; height: 80px;
+    transition: width .3s;
+    display: flex;
+    flex-direction: column; align-items: flex-start; 
+    &::before {content: 'Web Dev'; display: block; visibility: hidden;font-size: 7rem;}
+    .item {
+        position: absolute; top: 0;left: 0; transition: .3s;
+        flex: 1 0 auto;
+        &-deselected {
+            animation: unsl .5s ease-in;
+            animation-fill-mode: forwards;
+        }
+        &-selected {
+            animation: sl .5s ease-out;
+            animation-fill-mode: forwards;
+        }
+    }
+    .item--1 {transform: translateY(#{$oneline * 1 + 20px});}
+    
+
+}
+
+@keyframes unsl {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    60% {
+        transform: translateY(#{$oneline * -1 - 20px}); 
+        opacity: 1;
+    }
+    90% {
+        transform: translateY(#{$oneline * -1 - 20px}); 
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(#{$oneline * 1 + 20px});
+        opacity: 0;
+    }
+}
+@keyframes sl {
+    0% {
+        transform: translateY(#{$oneline * 1 + 20px});
+        opacity: 0;
+    }
+    10% {
+        transform: translateY(#{$oneline * 1 + 20px});
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0); 
+        opacity: 1;
+    }
+}
+
+/* 
+
+        <div class="list">
+            <div class="item item-deselected item--0">Web Dev</div>
+            <div class="item item-selected item--1">Artist</div>
+            <div class="item item--1">Anime Geek</div>
+        </div>
+
+        <div class="list">
+            <div class="item item-deselected item--0">Web Dev</div>
+            <div class="item item--1">Artist</div>
+            <div class="item item-selected item--1">Anime Geek</div>
+        </div>
+
+        <div class="list">
+            <div class="item item-deselected item--0">Web Dev</div>
+            <div class="item item-selected item--1">Artist</div>
+            <div class="item item-deselected item--1">Anime Geek</div>
+        </div>
+
+*/
